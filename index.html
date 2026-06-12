@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S. AI - Privacy Policy</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #d1d5db;
+            background-color: #0f172a;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            color: #38bdf8;
+        }
+        h1 {
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+        }
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #334155;
+        }
+        code {
+            background-color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #f43f5e;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>J.A.R.V.I.S. AI - Privacy & Data Policy</h1>
+        <p>J.A.R.V.I.S. is a fully self-hosted, local-first AI Desktop Assistant. This policy explains what data is accessed, how it is processed, and where it is stored. Because J.A.R.V.I.S. runs entirely on your local machine, <strong>your data remains under your absolute control</strong>. No personal data is collected or stored on external servers by developer endpoints.</p>
+        
+        <h2>1. Local Storage & Databases</h2>
+        <p>All configuration, state, and user logs are kept locally on your computer. The application utilizes the following SQLite databases and local configuration files:</p>
+        <ul>
+            <li><code>jarvis_user_data.db</code>: Stores user settings, personalizations, local device states, and credential mappings.</li>
+            <li><code>jarvis_bot_data.db</code> &amp; <code>jarvis_bot_logs.db</code>: Handles message history, logs, and queue states for the integrated Telegram bot.</li>
+            <li><code>reminders.db</code>: Stores custom user alarms, tasks, and notification schedules.</li>
+            <li><code>token.json</code> &amp; <code>token.pickle</code>: Stores encrypted local Google OAuth authorization tokens.</li>
+            <li><code>.env</code>: Stores sensitive developer keys (e.g., Cohere/Groq API keys, Sinric Pro credentials, and local networking hosts).</li>
+        </ul>
+        
+        <h2>2. Hardware Access &amp; Sensor Monitoring</h2>
+        <p>To perform desktop automation and status reports, J.A.R.V.I.S. requests access to specific local hardware components:</p>
+        <ul>
+            <li><strong>Microphone Input</strong>: Audio streams are processed in-memory using Python's <code>speech_recognition</code> and <code>pyaudio</code> libraries. Audio fragments are converted to text and immediately discarded; voice files are never saved to disk.</li>
+            <li><strong>Camera &amp; Vision</strong>: Camera frames are scanned in-memory by a local YOLOv8 neural network. No video frames, screenshots, or camera streams are saved on disk or sent over the network.</li>
+            <li><strong>macOS System Sensors</strong>: Compiled locally from <code>SensorsMonitor.swift</code> to query hardware status (temperature, battery, fan speed) via macOS CoreFoundation/IOKit.</li>
+            <li><strong>Clipboard Monitoring</strong>: Monitors copied text to enable smart automation triggers.</li>
+        </ul>
+        
+        <h2>3. Third-Party API Integrations</h2>
+        <p>When J.A.R.V.I.S. needs external intelligence or cloud integrations, it interacts directly with third-party servers using your personal credentials:</p>
+        <ul>
+            <li><strong>Google Workspace APIs (Gmail, Tasks, Drive, Calendar, YouTube)</strong>: All data is processed locally inside Python event loops and is never sent to third parties.</li>
+            <li><strong>Large Language Models (Groq, Cohere)</strong>: Text queries are sent to Groq/Cohere APIs using the keys in your <code>.env</code>.</li>
+            <li><strong>Sinric Pro</strong>: Used to toggle smart home switches.</li>
+        </ul>
+        
+        <h2>4. Revoking Scopes &amp; Data Deletion</h2>
+        <p>Since all data is stored locally on your device, you have complete control to delete it by removing <code>token.json</code>, your database files, or your API keys from the <code>.env</code> file.</p>
+    </div>
+</body>
+</html>
